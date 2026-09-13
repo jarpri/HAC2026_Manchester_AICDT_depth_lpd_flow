@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hac26"
+version = "0.1.0"
+description = "Learned Primal-Dual lightcurve inversion for the Helsinki Asteroid Challenge 2026"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "trimesh",
+    "scikit-image",
+    "rtree",
+    "fast_simplification",
+    "embreex",
+    "meshio",
+    "truststore",
+    "spiceypy",
+]
+
+[project.optional-dependencies]
+torch = ["torch>=2.1"]
+test = ["pytest>=7.0"]
+pipeline = ["torch>=2.1"]
+# What scripts/setup_toolchain.sh needs to build nvdiffrast. torch's extension builder
+# compiles with ninja when it finds one on PATH and falls back to one file at a time when it
+# does not, which is the difference between a build of a minute and a build of many; the
+# Makefile installs this extra by default and the script prints what to do when it is absent.
+toolchain = ["ninja"]
+# The everyday-object family of the shape library (scripts/fetch_objects.py). An addition to
+# the library rather than a requirement, which is why it is its own extra and not a
+# dependency: a run without it loses that family and goes on.
+objects = ["thingi10k"]
+
+[tool.setuptools]
+packages = ["hac26"]
+[tool.pytest.ini_options]
+markers = ["slow: extraction-scale tests",
+           "cuda: needs a CUDA device with nvdiffrast built"]

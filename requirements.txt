@@ -1,0 +1,12 @@
+numpy>=1.24
+scipy>=1.10
+torch>=2.1
+pytest>=7.0
+trimesh
+scikit-image
+rtree
+fast_simplification
+embreex
+meshio
+truststore
+spiceypy

@@ -1,0 +1,44 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+*.log
+.venv/
+.DS_Store
+
+# Challenge inputs: the organisers' released dataset, not redistributed here.
+# dataset/MANIFEST.sha256 lists them with checksums so they can be verified.
+dataset/*
+!dataset/MANIFEST.sha256
+
+# Working artefacts, rewritten by every run. Publish a validated one as a release
+# asset instead; the stable ones live in models/.
+runs/
+
+# What a run writes under results/: the two solvers' bodies, their coefficients and
+# checkpoints, the selection, and the wiring test's whole tree. The convex answers under
+# results/submission and results/public are tracked, and are the only files there that are.
+results/gn/
+results/map/
+results/lpd/
+results/convex/
+results/smoke/
+results/submission/selection.json
+
+# Written into the repo root by a run, not source.
+calibration.json
+logs/
+projection_scores.json
+
+# Local scratch: put one-off benchmarks and probes in scratch/ so they cannot be
+# committed by accident. The two named files were session benchmarks; `trimesh` is a
+# stray download, not the package.
+scratch/
+bench_raster.py
+surrogate_check.py
+/trimesh
+
+# A run's own console output and process ids, written into the repository root by
+# nohup and by the pipeline. They are records of one machine's run, not source.
+*.out
+*.pid
